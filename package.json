@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Travel Planner Application - Full Stack with Django and Ionic",
   "scripts": {
-    "start": "./start.sh",
-    "start:windows": "start.bat",
+    "start": "start.bat",
+    "start:unix": "./start.sh",
     "start:backend": "cd django/backend && source venv/bin/activate && python manage.py runserver",
     "start:frontend": "cd travel-planner && ionic serve",
     "install:backend": "cd django/backend && python -m venv venv && source venv/bin/activate && pip install django djangorestframework django-cors-headers",
