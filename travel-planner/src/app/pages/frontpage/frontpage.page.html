@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary">
+   <ion-title>Travel Planner</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="frontpage-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Explore the World with Ease</h1>
+    <p>Your personal travel planner starts here</p>
+
+    <!-- Buttons to open Login and Signup -->
+   <div class="auth-buttons" style="text-align: center; margin-top: 20px;">
+  <a href="../login/" class="btn primary">Login</a>
+</div>
+  </section>
+  <!-- Features Section -->
+   
+  <section class="features">
+    <div class="card" onclick="togglePlanForm()">
+  <h3>Personalized Plans</h3>
+  <p>Get travel plans tailored to your interests and time.</p>
+
+  <div id="planForm" style="display: none; margin-top: 15px;">
+    <form>
+      <label for="budget">Budget:</label><br>
+      <input type="text" id="budget" name="budget" placeholder="e.g., ₹25,000"><br><br>
+
+      <label for="days">Number of Days:</label><br>
+      <input type="number" id="days" name="days" placeholder="e.g., 5"><br><br>
+
+      <label for="interest">Interest:</label><br>
+      <select id="interest" name="interest">
+        <option value="beach">Beach</option>
+        <option value="mountain">Mountain</option>
+        <option value="city">City</option>
+        <option value="heritage">Heritage</option>
+      </select><br><br>
+
+      <button type="submit" class="btn primary">Get Plan</button>
+    </form>
+  </div>
+</div>
+
+    <div class="card">
+      <h3>Top Destinations</h3>
+      <p>Discover top-rated destinations curated for you.</p>
+    </div>
+    <div class="card">
+      <h3>Easy Bookings</h3>
+      <p>Book hotels, activities, and transport in just a click.</p>
+    </div>
+  </section>
+  
+
+  <!-- CTA -->
+  <!-- CTA -->
+<section class="cta">
+  <h2>Ready for your next adventure?</h2>
+  <a href="product.html" class="btn primary">View Travel Packages</a>
+  <br><br>
+  <a href="../signup/" class="btn secondary">Get Started</a>
+</section>
+
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <h3>Contact Us</h3>
+    <p><strong>Email:</strong> infotravelplanner.com</p>
+    <p><strong>Phone:</strong> +91 98765 43210</p>
+    <p><strong>Address:</strong> 123, Marina Street, Chennai, India</p>
+    <a href="contact.html" class="btn">Send a Message</a>
+  </section>
+<script>
+  function togglePlanForm() {
+    const form = document.getElementById("planForm");
+    if (form.style.display === "none") {
+      form.style.display = "block";
+    } else {
+      form.style.display = "none";
+    }
+  }
+</script>
+
+</ion-content>

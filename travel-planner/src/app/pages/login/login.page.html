@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="login()">
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-checkbox slot="start" [(ngModel)]="rememberMe" name="rememberMe"></ion-checkbox>
+      <ion-label>Remember Me</ion-label>
+    </ion-item>
+
+    <div class="forgot-password">
+      <a (click)="forgotPassword()">Forgot Password?</a>
+    </div>
+
+    <ion-button expand="block" type="submit">Login</ion-button>
+
+    <ion-text color="medium">
+      <p style="text-align: center; margin-top: 1rem;">
+        Don’t have an account?
+        <a (click)="goToSignup()">Sign up</a>
+      </p>
+    </ion-text>
+
+  </form>
+</ion-content>

@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Plan Results</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <h2>Your Travel Plan Summary</h2>
+  <p><strong>Budget:</strong> ₹{{ budget }}</p>
+  <p><strong>Days:</strong> {{ days }}</p>
+  <p><strong>Interest:</strong> {{ interest | titlecase }}</p>
+  <hr />
+   <!-- Beach Plans -->
+  <div *ngIf="interest ===  'beach'">
+  <h3>Beach Plans</h3>
+  <div class="plan-card">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800" alt="Goa Beach" />
+    <h4>Goa-3 Days-₹15,000</h4>
+    <p>Beach fun, water sports, nightlife</p>
+  </div>
+
+  <div class="plan-card">
+    <img src="https://images.unsplash.com/photo-1582719478250-06f3f3f826c3?auto=format&fit=crop&w=800" alt="Pondicherry" />
+    <h4>Pondicherry-2 Days-₹10,000</h4>
+    <p>French architecture,beaches,cafes</p>
+  </div>
+</div>
+
+  <!-- Mountain Plans -->
+ <div *ngIf="interest === 'mountain'">
+  <h3>🏔 Mountain Plans</h3>
+
+  <div class="plan-card">
+    <img src="https://images.unsplash.com/photo-1613428036305-f9b8e1f7648f?auto=format&fit=crop&w=800&h=400&q=80" alt="Manali" />
+    <h4>Manali - 5 Days - ₹20,000</h4>
+    <p>Snow peaks,adventure sports,nature walks</p>
+  </div>
+
+  <div class="plan-card">
+    <img src="https://images.unsplash.com/photo-1559027615-36a9dfb874b2?auto=format&fit=crop&w=800&h=400&q=80" alt="Munnar" />
+    <h4>Munnar - 4 Days - ₹18,000</h4>
+    <p>Tea gardens,hills,wildlife sanctuaries</p>
+  </div>
+</div>
+
+  <!-- City Plans -->
+  <div *ngIf="interest === 'city'">
+    <h3>🌆 City Plans</h3>
+
+    <div class="plan-card">
+      <img src="https://source.unsplash.com/featured/?city,delhi" alt="Delhi" />
+      <h4>Delhi</h4>
+      <p>₹{{ budget }} for {{ days }} days - Culture, shopping, and street food</p>
+    </div>
+
+    <div class="plan-card">
+      <img src="https://source.unsplash.com/featured/?city,bangalore" alt="Bangalore" />
+      <h4>Bangalore</h4>
+      <p>₹{{ budget }} for {{ days }} days - Urban fun and cafes</p>
+    </div>
+  </div>
+
+  <!-- Heritage Plans -->
+  <div *ngIf="interest === 'heritage'">
+    <h3>🏛️ Heritage Plans</h3>
+                                          
+    <div class="plan-card">
+      <img src="https://source.unsplash.com/featured/?heritage,jaipur" alt="Jaipur" />
+      <h4>Jaipur</h4>
+      <p>₹{{ budget }} for {{ days }} days- Forts and royal palaces</p>
+    </div>
+
+    <div class="plan-card">
+      <img src="https://source.unsplash.com/featured/?heritage,agra" alt="Agra" />
+      <h4>Agra</h4>
+      <p>₹{{ budget }} for {{ days }} days - Taj Mahal and Mughal history</p>
+    </div>
+  </div>
+</ion-content>

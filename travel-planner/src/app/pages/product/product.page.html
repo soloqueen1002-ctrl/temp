@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Travel Planner</ion-title>
+  </ion-toolbar>
+  <ion-searchbar [(ngModel)]="searchQuery" placeholder="Search destinations, hotels, food..." debounce="500"></ion-searchbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Hotels Section -->
+  <ion-card *ngFor="let hotel of filteredHotels">
+    <img [src]="hotel.image" alt="Hotel image" />
+    <ion-card-header>
+      <ion-card-title>{{ hotel.name }}</ion-card-title>
+      <ion-card-subtitle>₹{{ hotel.price }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{ hotel.description }}
+      <ion-button expand="block" color="primary" (click)="selectOption('hotel', hotel.name, hotel.price)">Book Hotel</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Food Section -->
+  <ion-card *ngFor="let food of filteredFoods">
+    <img [src]="food.image" alt="Food image" />
+    <ion-card-header>
+      <ion-card-title>{{ food.name }}</ion-card-title>
+      <ion-card-subtitle>₹{{ food.price }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{ food.description }}
+      <ion-button expand="block" color="success" (click)="selectOption('food', food.name, food.price)">Order Food</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Tourist Spots -->
+  <ion-card *ngFor="let spot of filteredSpots">
+    <img [src]="spot.image" alt="Spot image" />
+    <ion-card-header>
+      <ion-card-title>{{ spot.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ spot.description }}
+      <ion-button (click)="selectOption('spot', spot.name, 0)">View Spot</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Routes -->
+  <ion-card *ngFor="let route of filteredRoutes">
+    <ion-card-header>
+      <ion-card-title>{{ route.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ route.description }}
+      <ion-button (click)="selectOption('route', route.name, 0)">Explore Route</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Restaurants -->
+  <ion-card *ngFor="let restaurant of filteredRestaurants">
+    <img [src]="restaurant.image" alt="Restaurant image" />
+    <ion-card-header>
+      <ion-card-title>{{ restaurant.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ restaurant.specialty }}
+      <ion-button (click)="selectOption('restaurant', restaurant.name, 0)">View Restaurant</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  

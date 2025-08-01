@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Food Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="food">
+  <ion-card>
+    <img [src]="food.image" />
+    <ion-card-header>
+      <ion-card-title>{{ food.name }}</ion-card-title>
+      <ion-card-subtitle>₹{{ food.price }}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input [(ngModel)]="phone" type="tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Address</ion-label>
+      <ion-input [(ngModel)]="address"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" (click)="submitOrder()">Order Now</ion-button>
+</ion-content>
