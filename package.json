@@ -1,0 +1,29 @@
+{
+  "name": "travel-planner-fullstack",
+  "version": "1.0.0",
+  "description": "Travel Planner Application - Full Stack with Django and Ionic",
+  "scripts": {
+    "start": "./start.sh",
+    "start:windows": "start.bat",
+    "start:backend": "cd django/backend && source venv/bin/activate && python manage.py runserver",
+    "start:frontend": "cd travel-planner && ionic serve",
+    "install:backend": "cd django/backend && python -m venv venv && source venv/bin/activate && pip install django djangorestframework django-cors-headers",
+    "install:frontend": "cd travel-planner && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "setup": "npm run install:all && npm start"
+  },
+  "keywords": [
+    "travel",
+    "planner",
+    "django",
+    "ionic",
+    "angular",
+    "fullstack"
+  ],
+  "author": "Travel Planner Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}

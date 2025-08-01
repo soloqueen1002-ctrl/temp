@@ -204,7 +204,45 @@ The frontend uses a centralized `ApiService` that provides:
 
 ## 🚀 Running the Application
 
-### Development Mode
+### 🎯 **SIMPLE STARTUP (Recommended)**
+
+#### **Option 1: Direct Script (macOS/Linux)**
+
+```bash
+./start.sh
+```
+
+#### **Option 2: Direct Script (Windows)**
+
+```bash
+start.bat
+```
+
+#### **Option 3: Using npm (All Platforms)**
+
+```bash
+npm start
+```
+
+**That's it!** The script will automatically:
+
+- ✅ Check prerequisites (Python, Node.js, npm)
+- ✅ Create virtual environment if needed
+- ✅ Install all dependencies
+- ✅ Start both Django backend and Ionic frontend
+- ✅ Open the application in your browser
+
+**Access the application:**
+
+- 📱 Frontend: http://localhost:4200
+- 🔧 Backend API: http://localhost:8000
+- ⚙️ Django Admin: http://localhost:8000/admin
+
+---
+
+### Manual Startup (Alternative)
+
+If you prefer to start servers manually:
 
 1. **Start the Backend** (Terminal 1):
 
