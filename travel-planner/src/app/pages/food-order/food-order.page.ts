@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-food-order',
@@ -13,27 +15,57 @@ export class FoodOrderPage {
   email = '';
   phone = '';
   address = '';
+  quantity = 1;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private alertController: AlertController
+  ) {
     const nav = this.router.getCurrentNavigation();
     if (nav?.extras.state) {
       this.food = nav.extras.state['food'];
     }
   }
 
-  submitOrder() {
+  async submitOrder() {
+    if (!this.name || !this.email || !this.phone || !this.address) {
+      await this.presentAlert('Error', 'Please fill in all required fields.');
+      return;
+    }
+
     const orderData = {
-      food: this.food.name,
-      price: this.food.price,
       name: this.name,
       email: this.email,
       phone: this.phone,
-      address: this.address
+      address: this.address,
+      food_name: this.food?.name || 'Unknown Food',
+      food_price: this.food?.price || 0,
+      quantity: this.quantity,
     };
 
-    console.log('Food order confirmed:', orderData);
+    this.apiService.orderFood(orderData).subscribe({
+      next: async (response) => {
+        console.log('Food order successful:', response);
+        await this.presentAlert('Success', 'Food ordered successfully!');
+        this.router.navigate(['/product']);
+      },
+      error: async (error) => {
+        console.error('Food order failed:', error);
+        await this.presentAlert(
+          'Error',
+          'Failed to place food order. Please try again.'
+        );
+      },
+    });
+  }
 
-    // Optional: Send to backend via APIService
-    alert('Food order placed!');
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }

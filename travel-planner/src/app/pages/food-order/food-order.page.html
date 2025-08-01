@@ -15,20 +15,29 @@
 
   <ion-list>
     <ion-item>
-      <ion-label position="floating">Name</ion-label>
-      <ion-input [(ngModel)]="name"></ion-input>
+      <ion-label position="floating">Name *</ion-label>
+      <ion-input [(ngModel)]="name" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input [(ngModel)]="email" type="email"></ion-input>
+      <ion-label position="floating">Email *</ion-label>
+      <ion-input [(ngModel)]="email" type="email" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Phone</ion-label>
-      <ion-input [(ngModel)]="phone" type="tel"></ion-input>
+      <ion-label position="floating">Phone *</ion-label>
+      <ion-input [(ngModel)]="phone" type="tel" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Address</ion-label>
-      <ion-input [(ngModel)]="address"></ion-input>
+      <ion-label position="floating">Address *</ion-label>
+      <ion-input [(ngModel)]="address" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Quantity *</ion-label>
+      <ion-input
+        [(ngModel)]="quantity"
+        type="number"
+        min="1"
+        required
+      ></ion-input>
     </ion-item>
   </ion-list>
 

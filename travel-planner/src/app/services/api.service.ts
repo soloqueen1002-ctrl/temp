@@ -23,9 +23,11 @@ interface PostDataType {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
+  // Backend API base URL
+  private readonly API_BASE_URL = 'http://localhost:8000/api';
 
   // You might want to get this from a proper authentication service
   // or a global state management. For now, a placeholder.
@@ -37,7 +39,7 @@ export class ApiService {
   // Placeholder for a global spinner control
   private show_spinner: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Placeholder for default error handler
   private defaultErrHandler(error: any, afterErrorCallback?: () => void) {
@@ -72,7 +74,9 @@ export class ApiService {
       actionName,
       isFormData = false, // Default to false as in PPT
       responseType,
-      successCb = (response: any) => { console.log('Success (default):', response); }, // Default success callback
+      successCb = (response: any) => {
+        console.log('Success (default):', response);
+      }, // Default success callback
       errorCb,
       afterError,
       completeCb = () => this.defaultCompleteHandler(), // Default complete callback
@@ -109,10 +113,10 @@ export class ApiService {
     }
 
     const headers: HttpHeaders = new HttpHeaders({
-      'Authorization': this.get_session_id_login(),
+      Authorization: this.get_session_id_login(),
       // 'Content-Type' is usually set automatically by HttpClient for JSON,
       // but explicitly setting it for non-FormData requests as per PPT.
-      ...(isFormData ? {} : { 'Content-Type': 'application/json' })
+      ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
     });
 
     // Fix for TS2769: Use the correct HttpClient.post overload.
@@ -137,7 +141,7 @@ export class ApiService {
       requestOptions.responseType = responseType;
     }
 
-    let errorHandlerCb: (error: any) => void = (error: any) => { }; // Initialize with a no-op function
+    let errorHandlerCb: (error: any) => void = (error: any) => {}; // Initialize with a no-op function
 
     if (errorCb && !afterError) {
       errorHandlerCb = (err: any) => {
@@ -159,7 +163,6 @@ export class ApiService {
       };
     }
 
-
     if (!control_spinner_locally) {
       this.show_spinner = true; // Show spinner
     }
@@ -175,19 +178,56 @@ export class ApiService {
           }
           completeCb(); // Call the complete callback
         }),
-        catchError((err: any) => { // Explicitly type err here
+        catchError((err: any) => {
+          // Explicitly type err here
           // Re-throw the error after handling it, so the subscriber's errorCb is still called
           errorHandlerCb(err);
-          return new Observable(observer => observer.error(err)); // Re-throw the error
+          return new Observable((observer) => observer.error(err)); // Re-throw the error
         })
       )
       .subscribe({
         next: successCb,
-        error: (err: any) => { // Explicitly type err here
+        error: (err: any) => {
+          // Explicitly type err here
           // This error handler will only be called if catchError re-throws or doesn't handle it.
           console.error('Subscription error handler:', err);
-        }
+        },
       });
+  }
+
+  /**
+   * User signup method
+   */
+  signup(userData: any): Observable<any> {
+    return this.http.post(`${this.API_BASE_URL}/signup/`, userData);
+  }
+
+  /**
+   * User login method
+   */
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${this.API_BASE_URL}/login/`, credentials);
+  }
+
+  /**
+   * Hotel booking method
+   */
+  bookHotel(bookingData: any): Observable<any> {
+    return this.http.post(`${this.API_BASE_URL}/book-hotel/`, bookingData);
+  }
+
+  /**
+   * Food ordering method
+   */
+  orderFood(foodData: any): Observable<any> {
+    return this.http.post(`${this.API_BASE_URL}/order-food/`, foodData);
+  }
+
+  /**
+   * Get user orders method
+   */
+  getUserOrders(email: string): Observable<any> {
+    return this.http.get(`${this.API_BASE_URL}/my-orders/?email=${email}`);
   }
 
   /**
@@ -198,29 +238,6 @@ export class ApiService {
    * @returns An Observable of the API response.
    */
   storeBooking(bookingData: any): Observable<any> {
-    // Example: Replace with your actual booking API endpoint
-    const url = 'http://your-backend-api-url/bookings';
-    const modname = 'booking';
-    const actionName = 'store';
-
-    return new Observable(observer => {
-      this.call_http_post({
-        url: url,
-        modname: modname,
-        actionName: actionName,
-        data: bookingData,
-        successCb: (response) => {
-          observer.next(response);
-          observer.complete();
-        },
-        errorCb: (error) => {
-          observer.error(error);
-        },
-        completeCb: () => {
-          // This completeCb from call_http_post is handled by the observer.complete() above
-          // or observer.error() in case of an error.
-        }
-      });
-    });
+    return this.bookHotel(bookingData);
   }
 }
