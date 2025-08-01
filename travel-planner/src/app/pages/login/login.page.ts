@@ -26,22 +26,19 @@ export class LoginPage {
       return;
     }
 
-    const credentials = {
-      email: this.email,
-      password: this.password,
-    };
+    // Hardcoded credentials for testing
+    const validEmail = 'test@example.com';
+    const validPassword = 'password123';
 
-    this.apiService.login(credentials).subscribe({
-      next: async (response) => {
-        console.log('Login successful:', response);
-        await this.presentAlert('Success', 'Login successful!');
-        this.router.navigate(['/product']);
-      },
-      error: async (error) => {
-        console.error('Login failed:', error);
-        await this.presentAlert('Error', 'Invalid email or password.');
-      },
-    });
+    // Check against hardcoded credentials
+    if (this.email === validEmail && this.password === validPassword) {
+      console.log('Login successful with hardcoded credentials');
+      await this.presentAlert('Success', 'Login successful!');
+      this.router.navigate(['/product']);
+    } else {
+      console.log('Login failed: Invalid credentials');
+      await this.presentAlert('Error', 'Invalid email or password. Use test@example.com / password123');
+    }
   }
 
   async forgotPassword() {
